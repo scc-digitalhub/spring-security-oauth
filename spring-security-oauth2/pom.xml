@@ -1,70 +1,33 @@
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.springframework.security.oauth</groupId>
 
-	<parent>
-		<groupId>org.springframework.security.oauth</groupId>
-		<artifactId>spring-security-oauth-parent</artifactId>
-		<version>2.5.2.BUILD-SNAPSHOT</version>
-	</parent>
 
 	<artifactId>spring-security-oauth2</artifactId>
 	<name>OAuth2 for Spring Security</name>
 	<description>Module for providing OAuth2 support to Spring Security</description>
+	<version>2.6.0.SNAPSHOT</version>
 
 	<properties>
-		<jackson2.version>2.10.5</jackson2.version>
-		<servlet-api.version>3.0.1</servlet-api.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<commons-codec.version>1.14</commons-codec.version>
+		<spring.version>5.3.4</spring.version>
+		<spring.security.version>5.4.5</spring.security.version>
+		<junit.version>4.12</junit.version>
+		<java.version>1.10</java.version>
+		<jackson2.version>2.11.4</jackson2.version>
+		<servlet-api.version>4.0.1</servlet-api.version>
 		<spring.security.jwt.version>1.1.1.RELEASE</spring.security.jwt.version>
-		<powermock.version>1.7.4</powermock.version>
+		<javax-json.version>1.1.4</javax-json.version>
+		<javax-jsonb.version>1.0</javax-jsonb.version>
 	</properties>
 
 	<profiles>
-		<profile>
-			<id>spring5</id>
-			<properties>
-				<jackson2.version>2.10.5</jackson2.version>
-				<servlet-api.version>3.1.0</servlet-api.version>
-				<powermock.version>1.6.1</powermock.version>
-			</properties>
-		</profile>
 	</profiles>
 
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>site</phase>
-						<configuration>
-							<tasks>
-								<mkdir dir="${project.reporting.outputDirectory}/schema" />
-								<copy todir="${project.reporting.outputDirectory}/schema">
-									<fileset dir="src/main/resources">
-										<include name="**/*.xsd" />
-									</fileset>
-									<mapper type="flatten" />
-								</copy>
-
-								<copy file="${project.reporting.outputDirectory}/schema/spring-security-oauth2-2.0.xsd" tofile="${project.reporting.outputDirectory}/schema/spring-security-oauth2.xsd" />
-
-								<zip destfile="${project.reporting.outputDirectory}/sparklr2.zip">
-									<zipfileset dir="../samples/oauth2/sparklr" includes="pom.xml src/**" prefix="sparklr" />
-								</zip>
-								<zip destfile="${project.reporting.outputDirectory}/tonr2.zip">
-									<zipfileset dir="../samples/oauth2/tonr" includes="pom.xml src/**" prefix="tonr" />
-								</zip>
-							</tasks>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 
 	<dependencies>
 		<dependency>
@@ -76,66 +39,90 @@
 		</dependency>
 
 		<dependency>
-			<!--for the annotations. -->
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 
 		<dependency>
-			<!--for the annotations. -->
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 
 		<dependency>
-			<!--for the annotations. -->
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 
 		<dependency>
-			<!--for the annotations. -->
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<optional>true</optional>
+			<version>${spring.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
 			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
+			<version>${spring.security.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-jwt</artifactId>
+			<version>${spring.security.jwt.version}</version>
 			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework</groupId>
@@ -145,43 +132,38 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
+			<version>${commons-codec.version}</version>
 		</dependency>
 
+
+
 		<dependency>
-        	<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-redis</artifactId>
-			<version>${spring.data.redis.version}</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson2.version}</version>
 			<optional>true</optional>
 		</dependency>
 
 		<dependency>
-			<groupId>redis.clients</groupId>
-			<artifactId>jedis</artifactId>
-			<version>${redis.clients.version}</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson2.version}</version>
 			<optional>true</optional>
 		</dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>${jackson2.version}</version>
-            <optional>true</optional>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson2.version}</version>
-            <optional>true</optional>
-        </dependency>
 
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.5.10</version>
-            <optional>true</optional>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
@@ -199,26 +181,6 @@
 			<optional>true</optional>
 		</dependency>
 
-		<dependency>
-			<groupId>org.powermock</groupId>
-			<artifactId>powermock-module-junit4</artifactId>
-			<version>${powermock.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.powermock</groupId>
-			<artifactId>powermock-api-mockito</artifactId>
-			<version>${powermock.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>${mockito.version}</version>
-			<scope>test</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -234,6 +196,95 @@
 			<scope>test</scope>
 		</dependency>
 
-	</dependencies>
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.3.0</version>
+		</dependency>
 
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<version>2.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.3</version>
+					<dependencies>
+						<dependency><!-- add support for ssh/scp -->
+							<groupId>org.apache.maven.wagon</groupId>
+							<artifactId>wagon-ssh</artifactId>
+							<version>1.0</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.22.2</version>
+					<configuration>
+						<skip>${skipTests}</skip>
+						<includes>
+							<include>**/*Tests.java</include>
+						</includes>
+						<forkCount>3</forkCount>
+						<reuseForks>true</reuseForks>
+						<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<extensions>
+			<extension>
+				<groupId>org.springframework.build</groupId>
+				<artifactId>aws-maven</artifactId>
+				<version>5.0.0.RELEASE</version>
+			</extension>
+		</extensions>
+	</build>
 </project>
