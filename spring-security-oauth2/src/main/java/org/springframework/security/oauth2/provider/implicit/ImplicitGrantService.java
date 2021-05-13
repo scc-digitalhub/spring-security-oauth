@@ -11,10 +11,8 @@ import org.springframework.security.oauth2.provider.TokenRequest;
  * 
  * @author Amanda Anganes
  * 
- * @deprecated with no replacement (it shouldn't be necessary to use this strategy since 2.0.2)
  *
  */
-@Deprecated
 public interface ImplicitGrantService {
 
 	/**

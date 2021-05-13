@@ -9,11 +9,9 @@ import org.springframework.security.core.CredentialsContainer;
  * OAuth authorization grants don't require user authentication, the user authentication may be null.
  *
  * <p>
- * @deprecated See the <a href="https://github.com/spring-projects/spring-security/wiki/OAuth-2.0-Migration-Guide">OAuth 2.0 Migration Guide</a> for Spring Security 5.
  *
  * @author Ryan Heaton
  */
-@Deprecated
 public class OAuth2Authentication extends AbstractAuthenticationToken {
 
 	private static final long serialVersionUID = -4809832298438307309L;

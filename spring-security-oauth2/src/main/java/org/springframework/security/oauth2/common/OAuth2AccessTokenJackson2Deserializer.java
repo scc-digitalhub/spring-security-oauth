@@ -40,14 +40,12 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
  * </p>
  *
  * <p>
- * @deprecated See the <a href="https://github.com/spring-projects/spring-security/wiki/OAuth-2.0-Migration-Guide">OAuth 2.0 Migration Guide</a> for Spring Security 5.
  *
  * @author Rob Winch
  * @author Brian Clozel
  * @see org.springframework.security.oauth2.common.OAuth2AccessTokenJackson2Serializer
  */
 @SuppressWarnings("serial")
-@Deprecated
 public final class OAuth2AccessTokenJackson2Deserializer extends StdDeserializer<OAuth2AccessToken> {
 
 	public OAuth2AccessTokenJackson2Deserializer() {

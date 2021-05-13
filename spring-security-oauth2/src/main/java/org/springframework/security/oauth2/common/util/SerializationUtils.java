@@ -32,10 +32,8 @@ import java.util.List;
  * with a list of allowed classes for deserialization.
  *
  * <p>
- * @deprecated See the <a href="https://github.com/spring-projects/spring-security/wiki/OAuth-2.0-Migration-Guide">OAuth 2.0 Migration Guide</a> for Spring Security 5.
  *
  */
-@Deprecated
 public class SerializationUtils {
 
     private static SerializationStrategy strategy = new DefaultSerializationStrategy();
